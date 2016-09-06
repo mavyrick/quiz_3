@@ -1,0 +1,44 @@
+<h1><%= @idea.title %></h1>
+
+<p><%= @idea.description %></p>
+
+<% if @join.present? && @join.persisted? %>
+  <%= link_to "Un-Join", idea_join_path(@idea, @join), method: :delete %>
+<% else %>
+  <%= link_to "Join", idea_joins_path(@idea), method: :idea %>
+<% end %>
+
+<% if @like.present? && @like.persisted? %>
+  <%= link_to "Un-Like", idea_like_path(@idea, @like), method: :delete %>
+<% else %>
+  <%= link_to "Like", idea_likes_path(@idea), method: :idea %>
+<% end %>
+
+<%= link_to "Edit", edit_idea_path(@idea) %>
+<%= link_to "Delete", idea_path(@idea), method: :delete, data: {confirm: "Are you sure"} %>
+
+<hr>
+
+<h2>Add a comment</h2>
+<% if @comment.errors.any? %>
+  <ul>
+    <% @comment.errors.full_messages.each do |msg| %>
+      <li><%= msg %><li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_for [@idea, @comment] do |f| %>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <%= f.submit %>
+<% end %>
+
+<h2>Comments</h2>
+
+  <% @idea.comments.each do |comm| %>
+  <%= comm.body %>
+  <%= link_to "Delete Comment", [@idea, comm], method: :delete, data: {confirm: "Are you sure?"} %>
+  <hr>
+<% end %>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Idea Factory</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+
+  <body>
+
+    <%= link_to "All Ideas", root_path %>
+
+    <%= link_to "New Idea", new_idea_path %>
+
+    <% if user_signed_in? %>
+    Welcome Mr. <%= current_user.last_name %>,
+    <%= link_to "Logout", sessions_path, method: :delete,
+             data: {confirm: "are you sure you want to log out?"}%>
+  <% else %>
+    <%= link_to "Login", new_session_path %> |
+    <%= link_to "Sign Up", new_user_path %>
+  <% end %>
+  <hr>
+
+    <%# link_to "Likes", likes_path %>
+
+    <%= yield %>
+  </body>
+</html>

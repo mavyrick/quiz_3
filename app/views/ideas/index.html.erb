@@ -1,0 +1,16 @@
+<h1>Idea Factory</h1>
+
+<% @ideas.each do |idea|  %>
+  <div>
+    <h2><%= link_to idea.title, idea_path(idea) %></h2>
+    <p><%= idea.description %></p>
+
+    <%# if @like.present? && @like.persisted? %>
+      <%#= link_to "Un-Like", idea_like_path(@idea, @like), method: :delete %>
+    <%# else %>
+      <%#= link_to "Like", idea_likes_path(@idea), method: :idea %>
+    <%# end %>
+
+    <hr>
+  </div>
+<% end %>
