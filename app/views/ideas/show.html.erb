@@ -3,7 +3,7 @@
 <p><%= @idea.description %></p>
 
 <% if @join.present? && @join.persisted? %>
-  <%= link_to "Un-Join", idea_join_path(@idea, @join), method: :delete %>
+  <%= link_to "Leave", idea_join_path(@idea, @join), method: :delete %>
 <% else %>
   <%= link_to "Join", idea_joins_path(@idea), method: :idea %>
 <% end %>

@@ -4,9 +4,30 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    can :manage, Idea do |idea|
-     idea.user == user
-   end
+  can :manage, Idea do |idea|
+    idea.user == user
+  end
+
+  cannot :destroy, Comment do |comment|
+    user != comment.user
+  end
+
+  can :create, Like do |like|
+    user != like.user
+  end
+
+  cannot :create, Like do |like|
+    user == like.user
+  end
+
+  can :destroy, Like do |like|
+    user != like.user
+  end
+
+  cannot :destroy, Like do |like|
+    user == like.user
+  end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
