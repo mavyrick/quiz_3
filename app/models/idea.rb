@@ -1,12 +1,13 @@
 class Idea < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
+  belongs_to :user
 
   has_many :likes, dependent: :destroy
-  has_many :users, through: :likes
+  has_many :like_users, through: :likes
 
   has_many :joins, dependent: :destroy
-  has_many :users, through: :joins
+  has_many :members, through: :joins, source: :user
 
   has_many :comments, dependent: :destroy
 

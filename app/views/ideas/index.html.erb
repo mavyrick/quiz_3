@@ -4,12 +4,25 @@
   <div>
     <h2><%= link_to idea.title, idea_path(idea) %></h2>
     <p><%= idea.description %></p>
+      <%# user = current_user.id %>
+    <p>By <%= idea.user.full_name %></p>
 
-    <%# if @like.present? && @like.persisted? %>
-      <%#= link_to "Un-Like", idea_like_path(@idea, @like), method: :delete %>
-    <%# else %>
-      <%#= link_to "Like", idea_likes_path(@idea), method: :idea %>
-    <%# end %>
+    <% join = idea.join_for current_user %>
+    <% if join.present? && join.persisted? %>
+    <%= link_to "Leave", idea_join_path(idea, join), method: :delete %>
+    <% else %>
+    <%= link_to "Join", idea_joins_path(idea), method: :idea %>
+    <% end %>
+
+    <% like = idea.like_for current_user %>
+    <% if like.present? && like.persisted? %>
+      <%= link_to "Un-Like", idea_like_path(idea, like), method: :delete %>
+    <% else %>
+      <%= link_to "Like", idea_likes_path(idea), method: :idea %>
+    <% end %>
+
+
+    <p>Members: <%= idea.joins.count %> | Likes: <%= idea.likes.count %></p>
 
     <hr>
   </div>

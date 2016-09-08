@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :joins, dependent: :destroy
   has_many :joined_ideas, through: :joins, source: :idea
 
+  has_many :ideas, dependent: :destroy
+
   def full_name
    "#{first_name} #{last_name}"
   end

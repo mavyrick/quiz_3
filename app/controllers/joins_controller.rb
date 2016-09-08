@@ -7,9 +7,9 @@ class JoinsController < ApplicationController
    idea      = Idea.find params[:idea_id]
    join.idea = idea
    if join.save
-     redirect_to idea, notice: "Joined!"
+     redirect_to root_path, notice: "Joined!"
    else
-     redirect_to idea, alert: "Can't join!"
+     redirect_to root_path, alert: "Can't join!"
    end
   end
 
@@ -17,7 +17,7 @@ class JoinsController < ApplicationController
     idea = Idea.find params[:idea_id]
     join = current_user.joins.find params[:id]
     join.destroy
-    redirect_to idea, notice: "Un-joined"
+    redirect_to root_path, notice: "Un-joined"
   end
 
 end

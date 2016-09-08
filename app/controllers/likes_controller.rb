@@ -7,9 +7,9 @@ class LikesController < ApplicationController
    idea      = Idea.find params[:idea_id]
    like.idea = idea
    if like.save
-     redirect_to idea, notice: "Liked!"
+     redirect_to root_path, notice: "Liked!"
    else
-     redirect_to idea, alert: "Can't Like!"
+     redirect_to root_path, alert: "Can't Like!"
    end
  end
 
@@ -17,7 +17,7 @@ class LikesController < ApplicationController
    idea = Idea.find params[:idea_id]
    like = current_user.likes.find params[:id]
    like.destroy
-   redirect_to idea, notice: "Unliked"
+   redirect_to root_path, notice: "Unliked"
  end
 
 end

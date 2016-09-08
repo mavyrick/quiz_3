@@ -35,6 +35,12 @@
   <%= f.submit %>
 <% end %>
 
+<h2>Members</h2>
+
+<% @idea.members.each do |member| %>
+    <p><%= member.full_name %></p>
+<% end %>
+
 <h2>Comments</h2>
 
   <% @idea.comments.each do |comm| %>
