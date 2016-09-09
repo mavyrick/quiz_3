@@ -1,3 +1,5 @@
+<div id="ideas-wrapper">
+
 <h1>Idea Factory</h1>
 
 <% @ideas.each do |idea|  %>
@@ -5,7 +7,7 @@
     <h2><%= link_to idea.title, idea_path(idea) %></h2>
     <p><%= idea.description %></p>
       <%# user = current_user.id %>
-    <p>By <%= idea.user.full_name %></p>
+    <p class='by'>By <%= idea.user.full_name %></p>
 
     <% join = idea.join_for current_user %>
     <% if join.present? && join.persisted? %>
@@ -27,3 +29,4 @@
     <hr>
   </div>
 <% end %>
+</div>

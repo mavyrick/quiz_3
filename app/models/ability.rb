@@ -12,21 +12,35 @@ class Ability
     user != comment.user
   end
 
-  can :create, Like do |like|
-    user != like.user
-  end
+  # can :create, Like do |like|
+  #   # byebug
+  #   user.ideas.include(like.idea)
+  # end
 
-  cannot :create, Like do |like|
-    user == like.user
+  can :create, Like do |like|
+    !user.ideas.include?(like.idea)
   end
 
   can :destroy, Like do |like|
-    user != like.user
-  end
-
-  cannot :destroy, Like do |like|
     user == like.user
   end
+
+  can :create, Join do |join|
+    !user.ideas.include?(join.idea)
+  end
+
+  can :destroy, Join do |join|
+    user == join.user
+  end
+
+  can :destroy, Comment do |comment|
+    (user == comment.user) || (user == comment.idea.user)
+  end
+
+
+  # cannot :destroy, Like do |like|
+  #   user == like.user
+  # end
 
     # Define abilities for the passed in user here. For example:
     #

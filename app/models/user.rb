@@ -13,6 +13,8 @@ class User < ApplicationRecord
 
   has_many :ideas, dependent: :destroy
 
+  has_many :comments, dependent: :destroy
+
   def full_name
    "#{first_name} #{last_name}"
   end

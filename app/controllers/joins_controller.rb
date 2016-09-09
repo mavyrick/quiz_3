@@ -6,8 +6,9 @@ class JoinsController < ApplicationController
    join      = current_user.joins.new
    idea      = Idea.find params[:idea_id]
    join.idea = idea
+   authorize! :create, join
    if join.save
-     redirect_to root_path, notice: "Joined!"
+     redirect_to root_path, notice: "You have joined #{idea.title}!"
    else
      redirect_to root_path, alert: "Can't join!"
    end
@@ -16,8 +17,9 @@ class JoinsController < ApplicationController
   def destroy
     idea = Idea.find params[:idea_id]
     join = current_user.joins.find params[:id]
+    authorize! :destroy, join
     join.destroy
-    redirect_to root_path, notice: "Un-joined"
+    redirect_to root_path, notice: "You have left #{idea.title}!"
   end
 
 end

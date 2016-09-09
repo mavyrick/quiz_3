@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+
+  include CanCan::ControllerAdditions
+
   protect_from_forgery with: :exception
 
   def authenticate_user!
@@ -14,9 +17,5 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by_id session[:user_id]
   end
   helper_method :current_user
-
-  def full_name
-   "#{first_name} #{last_name}"
-  end
 
 end

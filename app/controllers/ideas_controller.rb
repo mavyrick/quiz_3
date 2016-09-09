@@ -34,6 +34,7 @@ end
     @like = @idea.like_for(current_user)
     @join = @idea.join_for(current_user)
     @comment = Comment.new
+    # @comment.user = current_user
   end
 
   def update

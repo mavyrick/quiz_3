@@ -1,7 +1,10 @@
+<div id='show-wrapper'>
+
 <h1><%= @idea.title %></h1>
 
 <p><%= @idea.description %></p>
 
+<div id='actions'>
 <% if @join.present? && @join.persisted? %>
   <%= link_to "Leave", idea_join_path(@idea, @join), method: :delete %>
 <% else %>
@@ -16,6 +19,7 @@
 
 <%= link_to "Edit", edit_idea_path(@idea) %>
 <%= link_to "Delete", idea_path(@idea), method: :delete, data: {confirm: "Are you sure"} %>
+</div>
 
 <hr>
 
@@ -45,6 +49,9 @@
 
   <% @idea.comments.each do |comm| %>
   <%= comm.body %>
+  <p class='by'>By <%= comm.user.full_name %></p>
   <%= link_to "Delete Comment", [@idea, comm], method: :delete, data: {confirm: "Are you sure?"} %>
   <hr>
 <% end %>
+
+</div>
